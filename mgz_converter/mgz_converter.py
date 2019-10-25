@@ -89,6 +89,11 @@ where necessary.)
         [--version]
         If specified, print version number and exit.
 
+        [--conversion_type <conversion_type>]
+        Should be specified,
+        If the <conversion_type> is 1, converts the input mgz images to png
+        If the <conversion_type> is 2, converts the input mgz images to npy
+
 """
 
 
@@ -235,8 +240,8 @@ class Mgz_converter(ChrisApp):
             img1 = nib.load(options.inputdir + "/" + i + "/aparc.a2009s+aseg.mgz")
             file = open(options.outputdir +"/input/" + i + ".npy", "wb")
             file1 = open(options.outputdir + "/label/" +i + ".npy","wb")
-            np.save(file1, img1)
-            np.save(file, img)
+            np.save(file1, img1.get_data())
+            np.save(file, img.get_data())
 
     def show_man_page(self):
         """

@@ -1,2 +1,10 @@
 chrisapp
 pudb
+chrisapp
+pudb
+nibabel
+numpy
+tqdm
+scipy
+pillow
+imageio

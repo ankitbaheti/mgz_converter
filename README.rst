@@ -16,7 +16,7 @@ pl-mgz_converter
 Abstract
 --------
 
-An app to ...
+``mgz_converter.py`` is a ChRIS-based application that takes Brain MRI images present in mgz format from the input diretctory, converts them to png or npy format based on the conversion type and saves output to the output directory.
 
 
 Synopsis
@@ -24,18 +24,14 @@ Synopsis
 
 .. code::
 
-    python mgz_converter.py                                           \
+    python mgz_converter.py                                         \
         [-v <level>] [--verbosity <level>]                          \
         [--version]                                                 \
         [--man]                                                     \
         [--meta]                                                    \
-        <inputDir>
-        <outputDir> 
-
-Description
------------
-
-``mgz_converter.py`` is a ChRIS-based application that...
+        [--conversion_type <conversion_type>]                       \
+        <inputDir>                                                  \
+        <outputDir>                                                 \
 
 Agruments
 ---------
@@ -54,6 +50,10 @@ Agruments
     [--meta]
     If specified, print plugin meta data.
 
+    [--conversion_type <conversion_type>]     
+    Should be specified,
+    If the <conversion_type> is 1, converts the input mgz images to png
+    If the <conversion_type> is 2, converts the input mgz images to npy
 
 Run
 ----
@@ -90,24 +90,47 @@ To run using ``docker``, be sure to assign an "input" directory to ``/incoming``
 Now, prefix all calls with 
 
 .. code:: bash
-
-    docker run --rm -v $(pwd)/out:/outgoing                             \
-            fnndsc/pl-mgz_converter mgz_converter.py                        \
+    mkdir in out && chmod 777 out
+    docker run --rm -v --conversion_type <conversion_type> $(pwd)/out:/outgoing                             \
+            pl-mgz_converter mgz_converter.py                                                               \
+            /incoming /outgoing                                                                             
 
 Thus, getting inline help is:
 
 .. code:: bash
 
     mkdir in out && chmod 777 out
-    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing      \
-            fnndsc/pl-mgz_converter mgz_converter.py                        \
-            --man                                                       \
+    docker run --rm -v --conversion_type <conversion_type> $(pwd)/in:/incoming -v $(pwd)/out:/outgoing      \
+            pl-mgz_converter mgz_converter.py                                                               \
+            --man                                                                                           \
             /incoming /outgoing
 
 Examples
 --------
 
+Convert mgz images to png 
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+    mkdir in out && chmod 777 out
+    docker run --rm -v --conversion_type 1 $(pwd)/out:/outgoing                                             \
+            pl-mgz_converter mgz_converter.py                                                        \
+            /incoming /outgoing   
 
 
+This will convert the ``*.mgz`` images present in the input directory to ``*.png`` format and saves them inside out/png directory
+
+Convert mgz images to npy 
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+    
+    mkdir in out && chmod 777 out
+    docker run --rm -v --conversion_type 2 $(pwd)/out:/outgoing                                             \
+            pl-mgz_converter mgz_converter.py                                                               \
+            /incoming /outgoing   
+
+This will convert the ``*.mgz`` images present in the input directory to ``*.npy`` format and saves them inside out/numpy directory
 
 
