@@ -14,6 +14,10 @@ import os
 import sys
 import numpy as np
 import nibabel as nib
+import scipy.misc, numpy, shutil, os, nibabel
+import imageio
+import os
+import scipy
 from tqdm import tqdm
 
 sys.path.append(os.path.dirname(__file__))
@@ -166,10 +170,6 @@ class Mgz_converter(ChrisApp):
 
     def convert_nifti_to_png(self,new_image,output_name):
         # converting nifti to .png
-        import scipy.misc, numpy, shutil, os, nibabel
-        import imageio
-        import os
-        import scipy
         ask_rotate_num=90
         outputfile=output_name
         inputfile='input'
