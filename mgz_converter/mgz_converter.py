@@ -247,7 +247,7 @@ class Mgz_converter(ChrisApp):
         """
         Print the app's man page.
         """
-        print(options)
+        print(Gstr_synopsis)
 
 
 # ENTRYPOINT
