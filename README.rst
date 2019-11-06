@@ -91,8 +91,8 @@ Now, prefix all calls with
 
 .. code:: bash
     mkdir in out && chmod 777 out
-    docker run --rm -v --conversion_type <conversion_type> $(pwd)/out:/outgoing                             \
-            pl-mgz_converter mgz_converter.py                                                               \
+    docker run --rm -v $(pwd)/out:/outgoing                                                                 \
+            pl-mgz_converter mgz_converter.py --conversion_type <conversion_type>                           \
             /incoming /outgoing                                                                             
 
 Thus, getting inline help is:
@@ -100,8 +100,8 @@ Thus, getting inline help is:
 .. code:: bash
 
     mkdir in out && chmod 777 out
-    docker run --rm -v --conversion_type <conversion_type> $(pwd)/in:/incoming -v $(pwd)/out:/outgoing      \
-            pl-mgz_converter mgz_converter.py                                                               \
+    docker run --rm -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing                                          \
+            pl-mgz_converter mgz_converter.py --conversion_type <conversion_type>                           \
             --man                                                                                           \
             /incoming /outgoing
 
@@ -114,8 +114,8 @@ Convert mgz images to png
 .. code:: bash
 
     mkdir in out && chmod 777 out
-    docker run --rm -v --conversion_type 1 $(pwd)/out:/outgoing                                             \
-            pl-mgz_converter mgz_converter.py                                                        \
+    docker run --rm -v $(pwd)/out:/outgoing                                             \
+            pl-mgz_converter mgz_converter.py --conversion_type 1                                                       \
             /incoming /outgoing   
 
 
@@ -127,8 +127,8 @@ Convert mgz images to npy
 .. code:: bash
     
     mkdir in out && chmod 777 out
-    docker run --rm -v --conversion_type 2 $(pwd)/out:/outgoing                                             \
-            pl-mgz_converter mgz_converter.py                                                               \
+    docker run --rm -v $(pwd)/out:/outgoing                                             \
+            pl-mgz_converter mgz_converter.py  --conversion_type 2                      \
             /incoming /outgoing   
 
 This will convert the ``*.mgz`` images present in the input directory to ``*.npy`` format and saves them inside out/numpy directory
