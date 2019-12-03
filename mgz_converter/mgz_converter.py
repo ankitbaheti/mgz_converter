@@ -154,8 +154,8 @@ class Mgz_converter(ChrisApp):
         """
 
         try:
-            os.mkdir(options.outputdir + "/input")
-            os.mkdir(options.outputdir + "/label")
+            os.mkdir(options.outputdir + "/input_images")
+            os.mkdir(options.outputdir + "/label_images")
 
         except OSError:
             print ("Output folders already exist")
@@ -238,8 +238,8 @@ class Mgz_converter(ChrisApp):
         for i in tqdm(dirs):
             img = nib.load(options.inputdir + "/" + i + "/brain.mgz")
             img1 = nib.load(options.inputdir + "/" + i + "/aparc.a2009s+aseg.mgz")
-            file = open(options.outputdir +"/input/" + i + ".npy", "wb")
-            file1 = open(options.outputdir + "/label/" +i + ".npy","wb")
+            file = open(options.outputdir +"/input_images/" + i + ".npy", "wb")
+            file1 = open(options.outputdir + "/label_images/" +i + ".npy","wb")
             np.save(file1, img1.get_data())
             np.save(file, img.get_data())
 
