@@ -229,8 +229,8 @@ class Mgz_converter(ChrisApp):
             X_nifti= nib.Nifti1Image(X_numpy, affine=np.eye(4))
             y_nifti= nib.Nifti1Image(y_numpy, affine=np.eye(4))
             # converting nifti to png
-            self.convert_nifti_to_png(X_nifti.get_data(),options.outputdir + "/" + i+"X")
-            self.convert_nifti_to_png(y_nifti.get_data(),options.outputdir + "/" + i+"y")
+            self.convert_nifti_to_png(X_nifti.get_data(),options.outputdir + "/input_images/" + i+"X")
+            self.convert_nifti_to_png(y_nifti.get_data(),options.outputdir + "/label_images/" + i+"y")
 
     def convert_to_npy(self,options):
         dirs = os.listdir(options.inputdir)
